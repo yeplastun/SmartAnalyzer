@@ -7,7 +7,7 @@ build:
   except:
     - master
 
-build:
+build-master:
   stage: build
   script:
     - mvn clean install -B
