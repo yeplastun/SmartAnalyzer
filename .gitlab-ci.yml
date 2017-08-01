@@ -1,17 +1,11 @@
-image: maven:3.5.0-jdk-8
+image: maven:3.5-jdk-8
 
-build-master:
-  stage: build
-  script:
-      - mvn clean install -B
-    except:
-      - master
-
+before_script:
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
 
 build:
   stage: build
   script:
-      - mvn clean install -B
-    except:
-      - master
-
+    - mvn clean install -B
+  except:
+    - master
