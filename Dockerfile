@@ -1,0 +1,1 @@
+CMD ["mvn", "clean", "install", "-D"]
