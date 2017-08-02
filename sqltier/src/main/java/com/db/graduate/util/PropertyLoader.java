@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class PropertyLoader {
     private static String PROPERTY_FILE = System.getProperty(
-            "dbConnector", "dbConnector.properties");
+            "dbConnectorPropertyFile", "dbConnector.properties");
 
     public static Properties loadProperties() throws InvalidPropertiesFormatException {
         Properties properties = new Properties();
