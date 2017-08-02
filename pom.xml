@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.db.graduate</groupId>
-    <artifactId>app</artifactId>
+    <artifactId>dbwebapp</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>DEV-SNAPSHOT</version>
     <name>Grad App</name>
 
     <modules>
@@ -14,6 +14,7 @@
     </modules>
     
     <properties>
+        <project.version>0.1</project.version>
         <junit.version>4.12</junit.version>
     </properties>
 
