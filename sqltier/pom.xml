@@ -4,7 +4,7 @@
     <artifactId>sqllib</artifactId>
     <packaging>jar</packaging>
     <version>DEV-SNAPSHOT</version>
-    <name>sqltier</name>
+    <name>Sql Tier</name>
     <parent>
         <groupId>com.db.graduate</groupId>
         <artifactId>dbwebapp</artifactId>
