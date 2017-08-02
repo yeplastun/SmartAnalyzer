@@ -7,17 +7,17 @@ import org.junit.Test;
 
 import java.sql.Connection;
 
-public class MySqlFacadeTest {
+public class DbFacadeTest {
     private Mockery context = new Mockery();
 
-    private MySqlFacade mySqlFacade;
+    private DbFacade dbFacade;
     private Connection connection;
 
     @Before
     public void setUp() {
-        mySqlFacade = new MySqlFacade();
+        dbFacade = new DbFacade();
         connection = context.mock(Connection.class);
-        mySqlFacade.setConnection(connection);
+        dbFacade.setConnection(connection);
     }
 
     @Test
@@ -28,7 +28,7 @@ public class MySqlFacadeTest {
         }});
 
         // execute
-        mySqlFacade.disconnect();
+        dbFacade.disconnect();
 
         // verify
         context.assertIsSatisfied();
