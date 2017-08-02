@@ -1,20 +1,34 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.db.graduate</groupId>
-    <artifactId>webapp</artifactId>
-    <packaging>war</packaging>
+    <artifactId>app</artifactId>
+    <packaging>pom</packaging>
     <version>1.0</version>
-    <name>webapp Maven Webapp</name>
-    <url>http://maven.apache.org</url>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
-    </dependencies>
+    <name>Grad App</name>
+
+    <modules>
+        <module>webtier</module>
+        <module>sqltier</module>
+    </modules>
+    
+    <properties>
+        <junit.version>4.12</junit.version>
+    </properties>
+
     <build>
-        <finalName>dbWebapp</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 </project>
