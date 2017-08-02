@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.db.graduate</groupId>
             <artifactId>sqllib</artifactId>
-            <version>1.0</version>
+            <version>DEV-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>
