@@ -23,7 +23,7 @@ class LoginHandler {
         }
     }
 
-    private String getPasswordSql(String userId) {
+     String getPasswordSql(String userId) {
         return "SELECT user_pwd FROM users WHERE user_id='" + userId + "'";
     }
 
