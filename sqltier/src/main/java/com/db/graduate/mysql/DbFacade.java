@@ -34,6 +34,21 @@ public class DbFacade {
         }
     }
 
+    public DbResponseCode connectWithCredentials(String dbUser, String dbPwd) throws ClassNotFoundException {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Properties properties = PropertyLoader.loadProperties();
+            String dbUrl = properties.getProperty("dbPath") + properties.getProperty("dbName");
+
+            connection = DriverManager.getConnection(dbUrl, dbUser, dbPwd);
+
+            return SUCCESSFUL;
+        } catch (InvalidPropertiesFormatException | SQLException e) {
+            return FAILED;
+        }
+    }
+
     public boolean isConnected() throws SQLException {
         return connection != null && connection.isValid(TIMEOUT_IN_SECONDS);
     }
