@@ -16,6 +16,8 @@ class LoginHandler {
             pwdCorrect = checkPassword(userPwd, rs);
         }
 
+        storeLoginInfo();
+
         if (pwdCorrect) {
             return DbResponseCode.LOGIN_SUCCESSFUL;
         } else {
@@ -23,7 +25,11 @@ class LoginHandler {
         }
     }
 
-     String getPasswordSql(String userId) {
+    private void storeLoginInfo() {
+        // todo: implement in next req sprints
+    }
+
+    String getPasswordSql(String userId) {
         return "SELECT user_pwd FROM users WHERE user_id='" + userId + "'";
     }
 
