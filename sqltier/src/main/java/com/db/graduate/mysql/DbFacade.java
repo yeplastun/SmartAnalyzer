@@ -8,16 +8,19 @@ import java.sql.SQLException;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
-import static com.db.graduate.mysql.DbResponseCode.FAILED;
-import static com.db.graduate.mysql.DbResponseCode.SUCCESSFUL;
+import static com.db.graduate.mysql.DbResponseCode.*;
 
 public class DbFacade {
-
-    private static int TIMEOUT_IN_SECONDS = 5;
+    static int TIMEOUT_IN_SECONDS = 5;
 
     private Connection connection;
+    private LoginHandler loginHandler;
 
-    public DbResponseCode connect() throws ClassNotFoundException {
+    public DbFacade() {
+        loginHandler = new LoginHandler();
+    }
+
+    public DbResponseCode connectToDb() throws ClassNotFoundException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -34,18 +37,13 @@ public class DbFacade {
         }
     }
 
-    public DbResponseCode connectWithCredentials(String dbUser, String dbPwd) throws ClassNotFoundException {
+    public DbResponseCode login(String userId, String userPwd) throws ClassNotFoundException {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            assert isConnected();
 
-            Properties properties = PropertyLoader.loadProperties();
-            String dbUrl = properties.getProperty("dbPath") + properties.getProperty("dbName");
-
-            connection = DriverManager.getConnection(dbUrl, dbUser, dbPwd);
-
-            return SUCCESSFUL;
-        } catch (InvalidPropertiesFormatException | SQLException e) {
-            return FAILED;
+            return loginHandler.login(connection, userId, userPwd);
+        } catch (SQLException e) {
+            return LOGIN_FAILED;
         }
     }
 
