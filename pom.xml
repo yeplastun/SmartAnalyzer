@@ -11,6 +11,7 @@
     <modules>
         <module>webtier</module>
         <module>sqltier</module>
+        <module>web-app</module>
     </modules>
     
     <properties>
@@ -18,6 +19,7 @@
         <mysql.version>6.0.6</mysql.version>
         <junit.version>4.12</junit.version>
         <jmock.version>2.8.3</jmock.version>
+        <spring.boot.version>1.5.6.RELEASE</spring.boot.version>
     </properties>
 
     <build>
