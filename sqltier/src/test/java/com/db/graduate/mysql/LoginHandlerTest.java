@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -19,21 +20,23 @@ public class LoginHandlerTest {
     private String userPwd = "userPwd";
     private LoginHandler loginHandler;
     private ResultSet resultSet;
-    private Statement statement;
+    private PreparedStatement statement;
     private Connection connection;
 
     @Before
     public void setUp() throws Exception {
         loginHandler = new LoginHandler();
         resultSet = context.mock(ResultSet.class);
-        statement = context.mock(Statement.class);
+        statement = context.mock(PreparedStatement.class);
         connection = context.mock(Connection.class);
 
         context.checking(new Expectations() {{
-            oneOf(connection).createStatement();
+            oneOf(connection).prepareStatement(loginHandler.getPasswordSql());
             will(returnValue(statement));
-            oneOf(statement).execute(loginHandler.getPasswordSql(userId));
+            oneOf(statement).setString(1, userId);
+            oneOf(statement).execute();
             will(returnValue(true));
+            oneOf(statement).close();
             oneOf(statement).getResultSet();
             will(returnValue(resultSet));
         }});

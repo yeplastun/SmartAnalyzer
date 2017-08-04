@@ -1,20 +1,19 @@
 package com.db.graduate.mysql;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Objects;
 
 class LoginHandler {
     DbResponseCode login(Connection connection, String userId, String userPwd) throws SQLException {
         boolean pwdCorrect = false;
 
-        Statement statement = connection.createStatement();
-        if (statement.execute(getPasswordSql(userId))) {
+        PreparedStatement statement = connection.prepareStatement(getPasswordSql());
+        statement.setString(1, userId);
+        if (statement.execute()) {
             ResultSet rs = statement.getResultSet();
             pwdCorrect = checkPassword(userPwd, rs);
         }
+        statement.close();
 
         storeLoginInfo();
 
@@ -29,8 +28,8 @@ class LoginHandler {
         // todo: implement in next req sprints
     }
 
-    String getPasswordSql(String userId) {
-        return "SELECT user_pwd FROM users WHERE user_id='" + userId + "'";
+    String getPasswordSql() {
+        return "SELECT user_pwd FROM users WHERE user_id=?";
     }
 
     private boolean checkPassword(String userPwd, ResultSet resultSet) throws SQLException {
