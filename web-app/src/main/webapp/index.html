@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        AngularJs $http.post() Service Method Example
+    </title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script src="assests/js/index.es6"></script>
+</head>
+<body>
+<h2>AngularJS Http Post Method Example</h2>
+<div ng-app="postserviceApp" ng-controller="postserviceCtrl">
+    <div>
+        Name : <input ng-model="name" /><br/><br/>
+        Age : <input ng-model="age" /><br/><br/>
+        Adress : <input ng-model="adress" /><br/><br/>
+        <input type="button" value="Send" ng-click="postdata(name, age, adress)" /> <br/><br/>
+    </div>
+    <p>Output Message : {{msg}}</p>
+    <p>StatusCode: {{statusval}}</p>
+    <p>Status: {{statustext}}</p>
+    <p>Response Headers: {{headers}}</p>
+</div>
+</body>
+</html>
