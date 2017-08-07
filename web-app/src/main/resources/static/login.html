@@ -18,7 +18,7 @@
                     age: age,
                     adress: adress
                 };
-                $http.post('index.jsp', JSON.stringify(data)).then(function (response) {
+                $http.post('hello/jhe', JSON.stringify(data)).then(function (response) {
                     if (response.data)
                         $scope.msg = response.data;
                 }, function (response) {
