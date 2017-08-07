@@ -1,16 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.db.graduate</groupId>
-    <artifactId>dbwebapp</artifactId>
+    <artifactId>dbWebApp</artifactId>
     <packaging>pom</packaging>
-    <version>DEV-SNAPSHOT</version>
-    <name>Grad App</name>
+    <name>dbWebApp</name>
 
     <modules>
         <module>sqltier</module>
-        <module>web-app</module>
+        <module>webtier</module>
     </modules>
     
     <properties>
@@ -36,4 +33,6 @@
             </plugins>
         </pluginManagement>
     </build>
+    <groupId>com.db.graduate</groupId>
+    <version>DEV-SNAPSHOT</version>
 </project>

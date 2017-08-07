@@ -22,10 +22,10 @@
                     if (response.data)
                         $scope.msg = response.data;
                 }, function (response) {
-                    $scope.msg = "Service not Exists";
+                    $scope.msg = response.data; //"Service not Exists";
                     $scope.statusval = response.status;
                     $scope.statustext = response.statusText;
-                    $scope.headers = response.headers();
+                    $scope.headers = response.headers;
                 });
             };
         });

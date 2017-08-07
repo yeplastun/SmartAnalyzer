@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Deals</title>
+<script
+	src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script type="text/javascript">
+	var app = angular.module('deals', []);
+
+	app.controller('dealsCtrl', function($scope, $http) {
+		$scope.deals = [];
+		$scope.dealform = {
+				dealId : "",
+				dealAmount : ""
+			};
+
+		getDealDetails();
+
+		function getDealDetails() {
+			$http({
+				method : 'GET',
+				url : 'deal/all'
+			}).then(function successCallback(response) {
+				$scope.deals = response.data;
+			}, function errorCallback(response) {
+				console.log(response.statusText);
+			});
+		}
+
+		$scope.processDeal = function() {
+			$http({
+				method : 'POST',
+				url : 'deal/add',
+				data : angular.toJson($scope.dealform),
+				headers : {
+					'Content-Type' : 'application/json'
+				}
+			}).then(getDealDetails(), clearForm())
+			  .success(function(data){
+				$scope.deals = data
+		    });
+		}
+		$scope.editDeal = function(deal) {
+			$scope.dealform.dealId = deal.dealId;
+			$scope.dealform.dealAmount = deal.dealAmount;
+			disableID();
+		}
+		$scope.deleteDeal = function(deal) {
+			$http({
+				method : 'DELETE',
+				url : 'deal/delete',
+				data : angular.toJson(deal),
+				headers : {
+					'Content-Type' : 'application/json'
+				}
+			}).then(getDealDetails());
+		}
+
+		function clearForm() {
+			$scope.dealform.dealId = "";
+			$scope.dealform.dealAmount = "";
+			document.getElementById("dealId").disabled = false;
+		}
+		;
+		function disableID() {
+			document.getElementById("dealId").disabled = true;
+		}
+	});
+</script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body ng-app="deals" ng-controller="dealsCtrl">
+	<h3>Deal Details</h3>
+	<form ng-submit="processDealDetails()">
+		<div class="table-responsive">
+			<table class="table table-bordered" style="width: 600px">
+				<tr>
+					<td>Deal ID</td>
+					<td><input type="text" id="dealId" ng-model="dealform.dealId"
+						size="30" /></td>
+				</tr>
+				<tr>
+					<td>Deal Amount</td>
+					<td><input type="text" id="dealAmount"
+						ng-model="dealform.dealAmount" size="30" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit"
+						class="btn btn-primary btn-sm" ng-click="processDeal()"
+						value="Create / Update Deal" /></td>
+				</tr>
+			</table>
+		</div>
+	</form>
+	<h3>Deals</h3>
+	<div class="table-responsive">
+		<table class="table table-bordered" style="width: 600px">
+			<tr>
+				<th>Deal ID</th>
+				<th>Deal Amount</th>
+				<th>Actions</th>
+			</tr>
+
+			<tr ng-repeat="deal in deals">
+				<td>{{deal.dealId}}</td>
+				<td>{{deal.dealAmount}}</td>
+				<td><a ng-click="editDeal(deal)" class="btn btn-primary btn-sm">Edit</a>
+					| <a ng-click="deleteDeal(deal)" class="btn btn-danger btn-sm">Delete</a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

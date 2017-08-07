@@ -1,13 +1,12 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>sqllib</artifactId>
+    <artifactId>sqltier</artifactId>
     <packaging>jar</packaging>
-    <version>DEV-SNAPSHOT</version>
-    <name>Sql Tier</name>
+    <name>sqltier</name>
     <parent>
         <groupId>com.db.graduate</groupId>
-        <artifactId>dbwebapp</artifactId>
+        <artifactId>dbWebApp</artifactId>
         <version>DEV-SNAPSHOT</version>
     </parent>
     <dependencies>
@@ -32,4 +31,5 @@
     <build>
         <finalName>dbSqlLib</finalName>
     </build>
+    <groupId>com.db.graduate</groupId>
 </project>
