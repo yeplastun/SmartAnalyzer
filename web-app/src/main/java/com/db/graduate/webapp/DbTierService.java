@@ -1,5 +1,6 @@
 package com.db.graduate.webapp;
 
+import com.db.graduate.dao.Counterparty;
 import com.db.graduate.dao.Instrument;
 import com.db.graduate.mysql.DbFacade;
 import com.db.graduate.mysql.DbResponseCode;
@@ -37,7 +38,15 @@ public class DbTierService {
     public List<Instrument> getAllInstruments() {
         try {
             return dbFacade.getAllInstruments();
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            return Collections.emptyList();
+        }
+    }
+
+    public List<Counterparty> getAllCounterparties() {
+        try {
+            return dbFacade.getAllCounterparties();
+        } catch (SQLException ex) {
             return Collections.emptyList();
         }
     }

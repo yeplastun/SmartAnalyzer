@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 public class InstrumentController {
-    final DbTierService dbService;
+    private final DbTierService dbService;
 
     @Autowired
     public InstrumentController(DbTierService dbService) {
@@ -24,7 +24,7 @@ public class InstrumentController {
         return "Hello, " + name + "!";
     }
 
-    @RequestMapping("instrument/all")
+    @RequestMapping("/instrument/all")
     List<Instrument> getAllInstruments() {
         return dbService.getAllInstruments();
     }
