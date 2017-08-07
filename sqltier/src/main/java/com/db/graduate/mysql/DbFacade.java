@@ -20,7 +20,7 @@ public class DbFacade {
         loginHandler = new LoginHandler();
     }
 
-    public DbResponseCode connectToDb() throws ClassNotFoundException {
+    public DbResponseCode connectToDb() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -34,10 +34,12 @@ public class DbFacade {
             return SUCCESSFUL;
         } catch (InvalidPropertiesFormatException | SQLException e) {
             return FAILED;
+        } catch (ClassNotFoundException ex) {
+            return DRIVER_NOT_FOUND;
         }
     }
 
-    public DbResponseCode login(String userId, String userPwd) throws ClassNotFoundException {
+    public DbResponseCode login(String userId, String userPwd) {
         try {
             assert isConnected();
 
