@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Instruments</title>
+<script
+	src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script type="text/javascript">
+	var app = angular.module('instruments', []);
+
+	app.controller('instrumentsCtrl', function($scope, $http) {
+		$scope.instruments = []
+		$scope.instrumentform = {
+				instrumentId : "",
+				instrumentName : ""
+			};
+
+		getInstrumentDetails();
+
+		function getInstrumentDetails() {
+			$http({
+				method : 'GET',
+				url : 'instrument/all'
+			}).then(function successCallback(response) {
+				$scope.instruments = response.data;
+			}, function errorCallback(response) {
+				console.log(response.statusText);
+			});
+		}
+
+		$scope.processInstrument = function() {
+			$http({
+				method : 'POST',
+				url : 'instrument/add',
+				data : angular.toJson($scope.instrumentform),
+				headers : {
+					'Content-Type' : 'application/json'
+				}
+			}).then(getInstrumentDetails(), clearForm())
+			  .success(function(data){
+				$scope.instruments = data
+		    });
+		}
+		$scope.editInstrument = function(instrument) {
+			$scope.instrumentform.instrumentId = instrument.instrumentId;
+			$scope.instrumentform.instrumentName = instrument.instrumentName;
+			disableID();
+		}
+		$scope.deleteInstrument = function(instrument) {
+			$http({
+				method : 'DELETE',
+				url : 'instrument/delete',
+				data : angular.toJson(instrument),
+				headers : {
+					'Content-Type' : 'application/json'
+				}
+			}).then(getInstrumentDetails());
+		}
+
+		function clearForm() {
+			$scope.instrumentform.instrumentId = "";
+			$scope.instrumentform.instrumentName = "";
+			document.getElementById("instrumentId").disabled = false;
+		}
+		;
+		function disableID() {
+			document.getElementById("instrumentId").disabled = true;
+		}
+	});
+</script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body ng-app="instruments" ng-controller="instrumentsCtrl">
+	<h3>Instrument Details</h3>
+	<form ng-submit="processInstrumentDetails()">
+		<div class="table-responsive">
+			<table class="table table-bordered" style="width: 600px">
+				<tr>
+					<td>Instrument ID</td>
+					<td><input type="text" id="instrumentId" ng-model="instrumentform.instrumentId"
+						size="30" /></td>
+				</tr>
+				<tr>
+					<td>Instrument Name</td>
+					<td><input type="text" id="instrumentName"
+						ng-model="instrumentform.instrumentName" size="30" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit"
+						class="btn btn-primary btn-sm" ng-click="processInstrument()"
+						value="Create / Update Instrument" /></td>
+				</tr>
+			</table>
+		</div>
+	</form>
+	<h3>Instruments</h3>
+	<div class="table-responsive">
+		<table class="table table-bordered" style="width: 600px">
+			<tr>
+				<th>Instrument Number</th>
+				<th>Instrument Name</th>
+				<th>Actions</th>
+			</tr>
+
+			<tr ng-repeat="instrument in instruments">
+				<td>{{instrument.instrumentId}}</td>
+				<td>{{instrument.instrumentName}}</td>
+				<td><a ng-click="editInstrument(instrument)" class="btn btn-primary btn-sm">Edit</a>
+					| <a ng-click="deleteInstrument(instrument)" class="btn btn-danger btn-sm">Delete</a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

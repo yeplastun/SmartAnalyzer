@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Counterparties</title>
+<script
+	src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script type="text/javascript">
+	var app = angular.module('counterparties', []);
+
+	app.controller('counterpartiesCtrl', function($scope, $http) {
+		$scope.counterparties = [];
+		$scope.counterpartyform = {
+				counterpartyId : "",
+				counterpartyName : ""
+			};
+
+		getCounterpartyDetails();
+
+		function getCounterpartyDetails() {
+			$http({
+				method : 'GET',
+				url : 'counterparty/all'
+			}).then(function successCallback(response) {
+				$scope.counterparties = response.data;
+			}, function errorCallback(response) {
+				console.log(response.statusText);
+			});
+		}
+
+		$scope.processCounterparty = function() {
+			$http({
+				method : 'POST',
+				url : 'counterparty/add',
+				data : angular.toJson($scope.counterpartyform),
+				headers : {
+					'Content-Type' : 'application/json'
+				}
+			}).then(getCounterpartyDetails(), clearForm())
+			  .success(function(data){
+				$scope.counterparties= data
+		    });
+		}
+		$scope.editCounterparty = function(counterparty) {
+			$scope.counterpartyform.counterpartyId = counterparty.counterpartyId;
+			$scope.counterpartyform.counterpartyName = counterparty.counterpartyName;
+			disableID();
+		}
+		$scope.deleteCounterparty = function(counterparty) {
+			$http({
+				method : 'DELETE',
+				url : 'counterparty/delete',
+				data : angular.toJson(counterparty),
+				headers : {
+					'Content-Type' : 'application/json'
+				}
+			}).then(getCounterpartyDetails());
+		}
+
+		function clearForm() {
+			$scope.counterpartyform.counterpartyId = "";
+			$scope.counterpartyform.counterpartyName = "";
+			document.getElementById("counterpartyId").disabled = false;
+		}
+		;
+		function disableID() {
+			document.getElementById("counterpartyId").disabled = true;
+		}
+	});
+</script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body ng-app="counterparties" ng-controller="counterpartiesCtrl">
+	<h3>Counterparty Details</h3>
+	<form ng-submit="processCounterpartyDetails()">
+		<div class="table-responsive">
+			<table class="table table-bordered" style="width: 600px">
+				<tr>
+					<td>Counterparty ID</td>
+					<td><input type="text" id="counterpartyId" ng-model="counterpartyform.counterpartyId"
+						size="30" /></td>
+				</tr>
+				<tr>
+					<td>Counterparty Name</td>
+					<td><input type="text" id="counterpartyName"
+						ng-model="counterpartyform.counterpartyName" size="30" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit"
+						class="btn btn-primary btn-sm" ng-click="processCounterparty()"
+						value="Create / Update Counterparty" /></td>
+				</tr>
+			</table>
+		</div>
+	</form>
+	<h3>Counterparties</h3>
+	<div class="table-responsive">
+		<table class="table table-bordered" style="width: 600px">
+			<tr>
+				<th>Counterparty Number</th>
+				<th>Counterparty Name</th>
+				<th>Actions</th>
+			</tr>
+
+			<tr ng-repeat="counterparty in counterparties">
+				<td>{{counterparty.counterpartyId}}</td>
+				<td>{{counterparty.counterpartyName}}</td>
+				<td><a ng-click="editCounterparty(counterparty)" class="btn btn-primary btn-sm">Edit</a>
+					| <a ng-click="deleteCounterparty(counterparty)" class="btn btn-danger btn-sm">Delete</a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
