@@ -1,4 +1,5 @@
-package com.db.graduate.webapp;
+/*
+package com.db.graduate.webapp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/**").addResourceLocations("classpath:/templates/");
         super.addResourceHandlers(registry);
     }
 
@@ -26,4 +28,4 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return viewResolver;
     }
 
-}
+}*/
