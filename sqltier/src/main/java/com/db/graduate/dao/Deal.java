@@ -1,10 +1,8 @@
 package com.db.graduate.dao;
 
-import java.sql.Date;
-
 public class Deal {
     private Long dealId;
-    private Date deal_time;
+    private String dealTime;
     private Long dealCounterpartyId;
     private Long dealInstrumentId;
     private String dealType;
@@ -19,12 +17,12 @@ public class Deal {
         this.dealId = dealId;
     }
 
-    public Date getDeal_time() {
-        return deal_time;
+    public String getDealTime() {
+        return dealTime;
     }
 
-    public void setDeal_time(Date deal_time) {
-        this.deal_time = deal_time;
+    public void setDealTime(String dealTime) {
+        this.dealTime = dealTime;
     }
 
     public Long getDealCounterpartyId() {

@@ -1,11 +1,10 @@
 package com.db.graduate.mysql;
 
 import com.db.graduate.dao.Counterparty;
+import com.db.graduate.dao.Deal;
 import com.db.graduate.dao.Instrument;
 import com.db.graduate.util.PropertyLoader;
-import org.w3c.dom.css.Counter;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
@@ -79,11 +78,11 @@ public class DbFacade {
         List<Instrument> instruments = new ArrayList<>();
         Statement statement = connection.createStatement();
         if (statement.execute("SELECT * FROM instrument")) {
-            ResultSet resultSet = statement.getResultSet();
-            while (resultSet.next()) {
+            ResultSet rs = statement.getResultSet();
+            while (rs.next()) {
                 Instrument instrument = new Instrument();
-                instrument.setInstrumentId(resultSet.getLong("instrument_id"));
-                instrument.setInstrumentName(resultSet.getString("instrument_name"));
+                instrument.setInstrumentId(rs.getLong("instrument_id"));
+                instrument.setInstrumentName(rs.getString("instrument_name"));
 
                 instruments.add(instrument);
             }
@@ -101,13 +100,13 @@ public class DbFacade {
         List<Counterparty> counterparties = new ArrayList<>();
         Statement statement = connection.createStatement();
         if (statement.execute("SELECT * FROM counterparty")) {
-            ResultSet resultSet = statement.getResultSet();
-            while (resultSet.next()) {
+            ResultSet rs = statement.getResultSet();
+            while (rs.next()) {
                 Counterparty counterparty = new Counterparty();
-                counterparty.setCounterpartyId(resultSet.getLong("counterparty_id"));
-                counterparty.setCounterpartyName(resultSet.getString("counterparty_name"));
-                counterparty.setCounterpartyStatus(resultSet.getString("counterparty_status"));
-                counterparty.setCounterpartyDateRegistered(resultSet.getDate("counterparty_date_registered"));
+                counterparty.setCounterpartyId(rs.getLong("counterparty_id"));
+                counterparty.setCounterpartyName(rs.getString("counterparty_name"));
+                counterparty.setCounterpartyStatus(rs.getString("counterparty_status"));
+                counterparty.setCounterpartyDateRegistered(rs.getDate("counterparty_date_registered"));
 
                 counterparties.add(counterparty);
             }
@@ -117,5 +116,32 @@ public class DbFacade {
 
         statement.close();
         return counterparties;
+    }
+
+    public List<Deal> getAllDeals() throws SQLException {
+        assert isConnected();
+
+        List<Deal> deals = new ArrayList<>();
+        Statement statement = connection.createStatement();
+        if (statement.execute("SELECT * FROM deal")) {
+            ResultSet rs = statement.getResultSet();
+            while (rs.next()) {
+                Deal deal = new Deal();
+                deal.setDealId(rs.getLong("deal_id"));
+                deal.setDealTime(rs.getString("deal_time"));
+                deal.setDealCounterpartyId(rs.getLong("deal_counterparty_id"));
+                deal.setDealInstrumentId(rs.getLong("deal_instrument_id"));
+                deal.setDealType(rs.getString("deal_type"));
+                deal.setDealAmount(rs.getDouble("deal_amount"));
+                deal.setDealQuantity(rs.getInt("deal_quantity"));
+
+                deals.add(deal);
+            }
+        } else {
+            throw new SQLException("Unable to get all instruments from database");
+        }
+
+        statement.close();
+        return deals;
     }
 }

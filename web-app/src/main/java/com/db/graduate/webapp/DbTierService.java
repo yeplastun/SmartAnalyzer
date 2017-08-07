@@ -1,6 +1,7 @@
 package com.db.graduate.webapp;
 
 import com.db.graduate.dao.Counterparty;
+import com.db.graduate.dao.Deal;
 import com.db.graduate.dao.Instrument;
 import com.db.graduate.mysql.DbFacade;
 import com.db.graduate.mysql.DbResponseCode;
@@ -46,6 +47,14 @@ public class DbTierService {
     public List<Counterparty> getAllCounterparties() {
         try {
             return dbFacade.getAllCounterparties();
+        } catch (SQLException ex) {
+            return Collections.emptyList();
+        }
+    }
+
+    public List<Deal> getAllDeals() {
+        try {
+            return dbFacade.getAllDeals();
         } catch (SQLException ex) {
             return Collections.emptyList();
         }
