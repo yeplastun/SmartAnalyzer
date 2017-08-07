@@ -3,10 +3,8 @@ package com.db.graduate.mysql;
 import com.db.graduate.dao.Instrument;
 import com.db.graduate.util.PropertyLoader;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.Properties;
@@ -72,10 +70,25 @@ public class DbFacade {
         this.connection = connection;
     }
 
-//    public List<Instrument> getAllInstruments() {
-//        assert isConnected();
+    public List<Instrument> getAllInstruments() throws SQLException {
+        assert isConnected();
 
-//        Statement statement = connection.createStatement();
+        List<Instrument> result = new ArrayList<>();
 
-//    }
+        Statement statement = connection.createStatement();
+        if (statement.execute("SELECT * FROM instrument")) {
+            ResultSet resultSet = statement.getResultSet();
+
+            while (resultSet.next()) {
+                Instrument instrument = new Instrument();
+                instrument.setInstrumentId(resultSet.getLong("instrument_id"));
+                instrument.setInstrumentName(resultSet.getString("instrument_name"));
+                result.add(instrument);
+            }
+
+        } else {
+            throw new SQLException("Unable to get all instruments from database");
+        }
+        return result;
+    }
 }
