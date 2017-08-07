@@ -9,7 +9,6 @@
     <name>Grad App</name>
 
     <modules>
-        <module>webtier</module>
         <module>sqltier</module>
         <module>web-app</module>
     </modules>
