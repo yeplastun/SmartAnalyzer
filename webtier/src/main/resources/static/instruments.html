@@ -5,7 +5,10 @@
 <title>Instruments</title>
 <script
 	src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+    <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
 <script type="text/javascript">
+	var app = angular.module('instruments', []);
 	var app = angular.module('instruments', []);
 
 	app.controller('instrumentsCtrl', function($scope, $http) {
