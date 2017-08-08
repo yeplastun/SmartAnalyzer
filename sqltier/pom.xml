@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sqltier</artifactId>
     <packaging>jar</packaging>
-    <name>sqltier</name>
+    <name>dbWebApp</name>
     <parent>
         <groupId>com.db.graduate</groupId>
         <artifactId>dbWebApp</artifactId>
-        <version>DEV-SNAPSHOT</version>
+        <version>1</version>
     </parent>
     <dependencies>
         <dependency>
@@ -29,7 +29,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>dbSqlLib</finalName>
+        <finalName>sqltier</finalName>
     </build>
     <groupId>com.db.graduate</groupId>
 </project>
