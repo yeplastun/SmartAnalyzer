@@ -42,6 +42,7 @@ public class DbFacade {
         }
     }
 
+    @Deprecated
     public DbResponseCode login(String userId, String userPwd) {
         try {
             assert isConnected();
@@ -50,6 +51,23 @@ public class DbFacade {
         } catch (SQLException e) {
             return LOGIN_FAILED;
         }
+    }
+
+    public String getPasswordByUserId(String userId) throws SQLException {
+        assert isConnected();
+
+        String password = null;
+        String sql = "SELECT user_pwd FROM users WHERE user_id=?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, userId);
+        if (statement.execute()) {
+            ResultSet rs = statement.getResultSet();
+            while (rs.next()) {
+                password = rs.getString("user_pwd");
+            }
+        }
+
+        return password;
     }
 
     public boolean isConnected() {
