@@ -25,13 +25,13 @@ import java.util.UUID;
 @RestController
 public class WebApp {
 
+    public static void main(String[] args) {
+        SpringApplication.run(WebApp.class, args);
+    }
+
     @Autowired
     public WebApp(DbUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(WebApp.class, args);
     }
 
     @RequestMapping("/user")
