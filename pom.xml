@@ -34,5 +34,5 @@
         </pluginManagement>
     </build>
     <groupId>com.db.graduate</groupId>
-    <version>DEV-SNAPSHOT</version>
+    <version>1.0</version>
 </project>
