@@ -14,6 +14,12 @@ angular
 
 instrumentsCtrl.$inject = ['$scope','$http','$filter'];
 function instrumentsCtrl($scope, $http, $filter) {
+	
+	
+	$scope.sortType     = 'instrumentId'; // set the default sort type
+	$scope.sortReverse  = false;  // set the default sort order
+	
+	
 	$scope.currentPage = 0;
     $scope.pageSize = 10;
     $scope.q = [];
@@ -50,6 +56,9 @@ function instrumentsCtrl($scope, $http, $filter) {
 counterpartiesCtrl.$inject = ['$scope','$http','$filter'];
 function counterpartiesCtrl($scope, $http, $filter) {
 
+	$scope.sortType     = 'counterpartyId'; // set the default sort type
+	$scope.sortReverse  = false;  // set the default sort order	
+	
 	$scope.currentPage = 0;
     $scope.pageSize = 10;
     $scope.q = [];
@@ -86,6 +95,9 @@ function counterpartiesCtrl($scope, $http, $filter) {
 
 dealsCtrl.$inject = ['$scope','$http', '$filter'];
 function dealsCtrl($scope, $http, $filter) {
+	
+	$scope.sortType     = 'dealId'; // set the default sort type
+	$scope.sortReverse  = false;  // set the default sort order
 	
 	$scope.currentPage = 0;
     $scope.pageSize = 10;
