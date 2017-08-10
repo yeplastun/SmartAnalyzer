@@ -8,7 +8,6 @@ import org.junit.Test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
 import static com.db.graduate.mysql.DbResponseCode.LOGIN_FAILED;
 import static com.db.graduate.mysql.DbResponseCode.LOGIN_SUCCESSFUL;

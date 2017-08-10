@@ -6,10 +6,7 @@ import com.db.graduate.dao.Instrument;
 import com.db.graduate.util.PropertyLoader;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.InvalidPropertiesFormatException;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 import static com.db.graduate.mysql.DbResponseCode.*;
 
@@ -68,6 +65,22 @@ public class DbFacade {
         }
 
         return password;
+    }
+
+    public Map<String, Double> getAvgAmountsPerInstrumentName() throws SQLException {
+        assert isConnected();
+
+        String getAvgAmountsPerInstrumentNameSql = "SELECT I.instrument_name, avg(D.deal_amount) AS avg_amount FROM deal D LEFT JOIN instrument I ON D.deal_instrument_id = I.instrument_id GROUP BY D.deal_instrument_id, I.instrument_name;";
+        Map<String, Double> amountPerInstrument = new HashMap<>();
+        Statement statement = connection.createStatement();
+        if (statement.execute(getAvgAmountsPerInstrumentNameSql)) {
+            ResultSet rs = statement.getResultSet();
+
+            while (rs.next()) {
+                amountPerInstrument.put(rs.getString("instrument_name"), rs.getDouble("avg_amount"));
+            }
+        }
+        return amountPerInstrument;
     }
 
     public boolean isConnected() {
