@@ -68,10 +68,10 @@ angular
     }
   })
   .state('app.components.tables', {
-    url: '/tables',
+    url: '/instruments',
     templateUrl: 'views/components/tables.html',
     ncyBreadcrumb: {
-      label: 'Tables'
+      label: 'Instruments'
     },
     resolve: {
       loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {

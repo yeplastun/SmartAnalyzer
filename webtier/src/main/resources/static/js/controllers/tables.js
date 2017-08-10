@@ -1,12 +1,24 @@
 angular
 .module('app')
+.filter('startFrom', function() {
+    return function(input, start) {
+        if (!input || !input.length) { return; }
+        start = +start; //parse to int
+        return input.slice(start);
+    }
+})
 .controller('instrumentsCtrl', instrumentsCtrl)
 .controller('counterpartiesCtrl', counterpartiesCtrl)
 .controller('dealsCtrl', dealsCtrl)
 
-instrumentsCtrl.$inject = ['$scope','$http'];
-function instrumentsCtrl($scope, $http) {
-	$scope.instruments = []
+
+instrumentsCtrl.$inject = ['$scope','$http','$filter'];
+function instrumentsCtrl($scope, $http, $filter) {
+	$scope.currentPage = 0;
+    $scope.pageSize = 10;
+    $scope.q = [];
+    
+    $scope.instruments = []
 	$scope.instrumentform = {
 			instrumentId : "",
 			instrumentName : ""
@@ -23,13 +35,25 @@ function instrumentsCtrl($scope, $http) {
 		}, function errorCallback(response) {
 			console.log(response.statusText);
 		});
-	}
+	} 
+    
+    
+    $scope.getData = function () {
+    	return $filter('filter')($scope.instruments, $scope.q)
+    }
+    
+    $scope.numberOfPages=function(){
+        return Math.ceil($scope.getData().length/$scope.pageSize);                
+    }
 }
 
+counterpartiesCtrl.$inject = ['$scope','$http','$filter'];
+function counterpartiesCtrl($scope, $http, $filter) {
 
-counterpartiesCtrl.$inject = ['$scope','$http'];
-function counterpartiesCtrl($scope, $http) {
-
+	$scope.currentPage = 0;
+    $scope.pageSize = 10;
+    $scope.q = [];
+	
 	$scope.counterparties = [];
 	$scope.counterpartyform = {
 			counterpartyId : "",
@@ -48,11 +72,25 @@ function counterpartiesCtrl($scope, $http) {
 			console.log(response.statusText);
 		});
 	}
+	
+    $scope.getData = function () {
+    	return $filter('filter')($scope.counterparties, $scope.q)
+    }
+    
+    $scope.numberOfPages=function(){
+        return Math.ceil($scope.getData().length/$scope.pageSize);                
+    }
+    
 }
 
 
-dealsCtrl.$inject = ['$scope','$http'];
-function dealsCtrl($scope, $http) {
+dealsCtrl.$inject = ['$scope','$http', '$filter'];
+function dealsCtrl($scope, $http, $filter) {
+	
+	$scope.currentPage = 0;
+    $scope.pageSize = 10;
+    $scope.q = [];
+	
 	$scope.deals = [];
 	$scope.dealform = {
 			dealId : "",
@@ -71,4 +109,13 @@ function dealsCtrl($scope, $http) {
 			console.log(response.statusText);
 		});
 	}
+	
+	$scope.getData = function () {
+    	return $filter('filter')($scope.deals, $scope.q)
+    }
+    
+    $scope.numberOfPages=function(){
+        return Math.ceil($scope.getData().length/$scope.pageSize);                
+    }
+	
 }

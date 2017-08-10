@@ -1,24 +1,8 @@
 angular
 .module('app')
-.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$breadcrumbProvider',  function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $breadcrumbProvider) {
+.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$breadcrumbProvider', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $breadcrumbProvider) {
 
-  
-/*'$routeProvider', '$httpProvider',
- * , $routeProvider, $httpProvider
- * 	$routeProvider.when('/', {
-        templateUrl: 'views/layouts/navbar.html',
-        controller: 'home',
-        controllerAs: 'controller'
-    }).when('/login', {
-        templateUrl: 'views/pages/login.html',
-        controller: 'navigation',
-        controllerAs: 'controller'
-    }).otherwise('/');
-
-    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';*/
-	
-	
-	$urlRouterProvider.otherwise('/dashboard');
+  $urlRouterProvider.otherwise('/dashboard');
 
   $ocLazyLoadProvider.config({
     // Set to true if you want to see what and when is dynamically loaded
@@ -63,13 +47,7 @@ angular
             'bower_components/angular-chart.js/dist/angular-chart.min.js'
           ]
         }]);
-      }],
-      loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-          // you can lazy load controllers
-          return $ocLazyLoad.load({
-            files: ['js/controllers/login.js']
-          });
-        }],
+      }]
     }
   })
   .state('app.main', {

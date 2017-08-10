@@ -2,7 +2,7 @@
  * CoreUI - Open Source Bootstrap Admin Template
  * @version v1.0.0-alpha.6
  * @link http://coreui.io
- * Copyright (c) 2017 creativeLabs Łukasz Holeczek
+ * Copyright (c) 2017 creativeLabs Å�ukasz Holeczek
  * @license MIT
  */
 /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
@@ -7318,6 +7318,9 @@ base-chart.chart {
   width: 250px; }
 
 .app-footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
   min-height: 50px;
   padding: 0 1rem;
   line-height: 50px;
