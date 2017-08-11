@@ -33,12 +33,28 @@
 							            <span ng-show="sortType == 'counterpartyName' && sortReverse" class="fa fa-caret-up"></span>
 						          	</a>
 								</th>
+								<th>
+									<a href="#" ng-click="sortType = 'counterpartyStatus'; sortReverse = !sortReverse">
+							            Counterparty Status 
+							            <span ng-show="sortType == 'counterpartyStatus' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'counterpartyStatus' && sortReverse" class="fa fa-caret-up"></span>
+						          	</a>
+								</th>
+								<th>
+									<a href="#" ng-click="sortType = 'counterpartyDateRegistered'; sortReverse = !sortReverse">
+							            Registration Date
+							            <span ng-show="sortType == 'counterpartyDateRegistered' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'counterpartyDateRegistered' && sortReverse" class="fa fa-caret-up"></span>
+						          	</a>
+								</th>
                             </tr>
                         </thead>
                         <tbody>
                             	<tr ng-repeat="item in counterparties | orderBy:sortType:sortReverse | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
 									<td>{{item.counterpartyId}}</td>
 									<td>{{item.counterpartyName}}</td>
+									<td>{{item.counterpartyStatus}}</td>
+									<td>{{item.counterpartyDateRegistered}}</td>
 								</tr>
                         </tbody>    
                         <tfoot>

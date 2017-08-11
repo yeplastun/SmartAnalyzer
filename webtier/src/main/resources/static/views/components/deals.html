@@ -16,6 +16,35 @@
 			        <option value="20">20</option>
 			     </select>
 			     <br>
+			     
+			     
+			     
+			     
+			     <hr>
+    <label>Min:{{ ui.min }}
+        <input type="range" 
+               min="0" 
+               max="100000"
+               numeric
+               data-ng-model="ui.min" >
+    </label>    
+    <hr>
+    <label>Max: {{ ui.max}}
+        <input type="range" 
+               min="0" 
+               max="100000"
+               numeric
+               data-ng-model="ui.max">    
+    </label>
+    <div data-ng-if="ui.min>ui.max">
+        <p>Min > Max makes little sense – sorry this is not about great UI/UX/BuzzBuzz ;-)</p>
+    </div>
+        
+    <hr>
+			     
+			     
+			     
+			     
                     <table class="table table-bordered table-striped table-sm">
                         <thead>
                             <tr>
@@ -27,18 +56,58 @@
 						          	</a>
                                 </th>
 								<th>
+									<a href="#" ng-click="sortType = 'dealTime'; sortReverse = !sortReverse">
+							            Deal Time 
+							            <span ng-show="sortType == 'dealTime' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'dealTime' && sortReverse" class="fa fa-caret-up"></span>
+						          	</a>
+								</th>
+								<th>
+									<a href="#" ng-click="sortType = 'dealCounterpartyId'; sortReverse = !sortReverse">
+							            Counterparty ID
+							            <span ng-show="sortType == 'dealCounterpartyId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'dealCounterpartyId' && sortReverse" class="fa fa-caret-up"></span>
+						          	</a>
+								</th>
+								<th>
+									<a href="#" ng-click="sortType = 'dealInstrumentId'; sortReverse = !sortReverse">
+							            Instrument ID
+							            <span ng-show="sortType == 'dealInstrumentId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'dealInstrumentId' && sortReverse" class="fa fa-caret-up"></span>
+						          	</a>
+								</th>
+								<th>
+									<a href="#" ng-click="sortType = 'dealType'; sortReverse = !sortReverse">
+							            Deal Type
+							            <span ng-show="sortType == 'dealType' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'dealType' && sortReverse" class="fa fa-caret-up"></span>
+						          	</a>
+								</th>
+								<th>
 									<a href="#" ng-click="sortType = 'dealAmount'; sortReverse = !sortReverse">
 							            Deal Amount 
 							            <span ng-show="sortType == 'dealAmount' && !sortReverse" class="fa fa-caret-down"></span>
 							            <span ng-show="sortType == 'dealAmount' && sortReverse" class="fa fa-caret-up"></span>
 						          	</a>
 								</th>
+								<th>
+									<a href="#" ng-click="sortType = 'dealQuantity'; sortReverse = !sortReverse">
+							            Quantity 
+							            <span ng-show="sortType == 'dealQuantity' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'dealQuantity' && sortReverse" class="fa fa-caret-up"></span>
+						          	</a>
+								</th>
                             </tr>
                         </thead>
                         <tbody>
-                            	<tr ng-repeat="item in deals | orderBy:sortType:sortReverse | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
+                            	<tr ng-repeat="item in deals | rangeFilter:'dealAmount':ui.min:ui.max | orderBy:sortType:sortReverse | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
 									<td>{{item.dealId}}</td>
+									<td>{{item.dealTime}}</td>
+									<td>{{item.dealCounterpartyId}}</td>
+									<td>{{item.dealInstrumentId}}</td>
+									<td>{{item.dealType}}</td>
 									<td>{{item.dealAmount}}</td>
+									<td>{{item.dealQuantity}}</td>
 								</tr>
                         </tbody>    
                         <tfoot>

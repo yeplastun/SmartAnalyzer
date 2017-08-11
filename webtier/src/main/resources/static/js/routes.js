@@ -103,15 +103,7 @@ angular
   // Additional Pages
   .state('appSimple.login', {
     url: '/login',
-    templateUrl: 'views/pages/login.html',
-    resolve: {
-        loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-          // you can lazy load controllers
-          return $ocLazyLoad.load({
-            files: ['js/controllers/login.js']
-          });
-        }]
-      }
+    templateUrl: 'views/pages/login.html'
   })
   .state('appSimple.register', {
     url: '/register',

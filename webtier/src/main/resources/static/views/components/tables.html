@@ -1,11 +1,11 @@
-<div class="animated fadeIn">
+<div class="animated fadeIn" ng-controller="instrumentsCtrl">
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-align-justify"></i> Instruments
                 </div>
-                <div class="card-block" ng-controller="instrumentsCtrl">
+                <div class="card-block">
                 
                 <span>Search </span><input ng-model="q" id="search" class="form-control" placeholder="Filter text">
     			<br>
@@ -52,8 +52,8 @@
 							        Next
 							    </button>
 							    </td>
-						    </tr>
-                        </tfoot>        
+						    </tr>	    
+         			     </tfoot>        
                     </table>
                 </div>
             </div>
