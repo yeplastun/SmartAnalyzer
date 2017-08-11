@@ -14,7 +14,7 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
 
 }).controller('navigation',
 
-    function ($rootScope, $http, $location, $route) {
+    function ($rootScope, $http, $location, $route, $window) {
 
         var self = this;
 
@@ -53,7 +53,7 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
             authenticate(self.credentials, function (authenticated) {
                 if (authenticated) {
                     console.log("Login succeeded")
-                    $location.path("/");
+                    $window.location.href = '/index.html'
                     self.error = false;
                     $rootScope.authenticated = true;
                 } else {
