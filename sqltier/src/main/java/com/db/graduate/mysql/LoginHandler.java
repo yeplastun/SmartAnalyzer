@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Objects;
 
-class LoginHandler {
-    DbResponseCode login(Connection connection, String userId, String userPwd) throws SQLException {
+public class LoginHandler {
+    public DbResponseCode login(Connection connection, String userId, String userPwd) throws SQLException {
         boolean pwdCorrect = false;
 
         Statement statement = connection.createStatement();
@@ -29,7 +29,7 @@ class LoginHandler {
         // todo: implement in next req sprints
     }
 
-    String getPasswordSql(String userId) {
+    public String getPasswordSql(String userId) {
         return "SELECT user_pwd FROM users WHERE user_id='" + userId + "'";
     }
 

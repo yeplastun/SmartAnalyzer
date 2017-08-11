@@ -59,7 +59,7 @@ public class DbFacade {
         if (connection != null) connection.close();
     }
 
-    void setConnection(Connection connection) {
+    public void setConnection(Connection connection) {
         this.connection = connection;
     }
 }
