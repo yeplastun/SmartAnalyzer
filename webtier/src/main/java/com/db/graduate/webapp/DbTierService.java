@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static com.db.graduate.mysql.DbResponseCode.SUCCESSFUL;
 
@@ -57,6 +58,14 @@ public class DbTierService {
             return dbFacade.getAllDeals();
         } catch (SQLException ex) {
             return Collections.emptyList();
+        }
+    }
+
+    public Map<String, Double> getAvgAmountsPerInstrumentName() {
+        try {
+            return dbFacade.getAvgAmountsPerInstrumentName();
+        } catch (SQLException ex) {
+            return Collections.emptyMap();
         }
     }
 }
