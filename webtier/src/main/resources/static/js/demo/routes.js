@@ -29,7 +29,7 @@ angular
     abstract: true,
     template: '<ui-view></ui-view>',
     ncyBreadcrumb: {
-      label: 'Components'
+      label: 'Tables'
     }
   })
   .state('app.components.buttons', {
@@ -161,10 +161,18 @@ angular
     }
   })
   .state('app.charts', {
-    url: '/charts',
-    templateUrl: 'views/charts.html',
+    url: "/charts",
+    abstract: true,
+    template: '<ui-view></ui-view>',
     ncyBreadcrumb: {
       label: 'Charts'
+    }
+  })
+  .state('app.charts.bar', {
+    url: '/bar',
+    templateUrl: 'views/charts/bar.html',
+    ncyBreadcrumb: {
+      label: 'Bar'
     },
     resolve: {
       // Plugins loaded before
