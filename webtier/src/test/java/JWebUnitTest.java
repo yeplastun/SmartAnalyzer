@@ -4,9 +4,12 @@
  * and open the template in the editor.
  */
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Scalar.String;
+import java.awt.Button;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.*;
+import org.junit.*; 
+
 
 import static net.sourceforge.jwebunit.junit.JWebUnit.*;
 import net.sourceforge.jwebunit.util.TestingEngineRegistry;
@@ -23,10 +26,15 @@ public class JWebUnitTest {
     @Test
     public void testLogin() {
         beginAt("index.jsp");
-        //clickLink("Login");
         assertTitleEquals("Login");
         setTextField("username", "test");
         setTextField("password", "test123");
         submit();
     }
-}
+    @Test
+    public void testSubmit(){
+        beginAt("index.jsp");
+        assertButtonPresent("submit_button");
+    }
+    }
+

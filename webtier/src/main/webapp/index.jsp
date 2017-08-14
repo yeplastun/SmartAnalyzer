@@ -23,7 +23,7 @@
 <form action="index.jsp" method="post">
     Username : <input type="text" name="username">
     Password : <input type="password" name="password">
-    <button type="submit">Login</button>
+    <button id= 'submit_button' type="submit">Login</button>
 </form>
 </body>
 </html>
