@@ -15,6 +15,7 @@
     }
 %>
 <html>
+    <title>Login</title>
 <body>
 <h2>Database Connection Status : <% out.println(responseCode); %>
 </h2>

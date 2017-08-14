@@ -22,6 +22,12 @@
             <artifactId>sqllib</artifactId>
             <version>DEV-SNAPSHOT</version>
         </dependency>
+        <dependency>
+    <groupId>net.sourceforge.jwebunit</groupId>
+    <artifactId>jwebunit-htmlunit-plugin</artifactId>
+    <version>3.3</version>
+    <scope>test</scope>
+     </dependency>
     </dependencies>
     <build>
         <finalName>dbWebApp</finalName>
